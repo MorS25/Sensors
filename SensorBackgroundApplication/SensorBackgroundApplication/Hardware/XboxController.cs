@@ -35,7 +35,7 @@ namespace SensorBackgroundApplication.Hardware
         /// </summary>
         /// <param name="deadZoneTolerance">The amount the stick needs to be moved before movement is registered</param>
         /// <returns></returns>
-        internal void Open(int deadZoneTolerance = 6000)
+        internal void Start(int deadZoneTolerance = 6000)
         {
             _deadzoneTolerance = deadZoneTolerance; 
 
