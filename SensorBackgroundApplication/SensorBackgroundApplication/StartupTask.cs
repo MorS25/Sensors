@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Net.Http;
@@ -30,7 +31,7 @@ namespace SensorBackgroundApplication
                 //https://az835927.vo.msecnd.net/sites/iot/Resources/images/PinMappings/RP2_Pinout.png
 
                 var inputPin = _gpioController.OpenPin(12);
-                inputPin.SetDriveMode(GpioPinDriveMode.Input);
+                inputPin.SetDriveMode(GpioPinDriveMode.InputPullDown); //Switch would be wired to pin 12 and pin 1
                 inputPin.ValueChanged += InputPin_ValueChanged;
 
                 var outputPin = _gpioController.OpenPin(36);
@@ -63,8 +64,8 @@ namespace SensorBackgroundApplication
         private void InputPin_ValueChanged(GpioPin sender, GpioPinValueChangedEventArgs args)
         {
             //Check on the edge, rising = just pushed, falling = released
-            var edge = args.Edge;
 
+            Debug.WriteLine($"Pin {sender.PinNumber} state changed => {args.Edge}");
         }
 
         internal static void Complete()
